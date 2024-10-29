@@ -100,4 +100,4 @@ curl https://$isvc_url/v1/completions \
 
 * You can also check the Ray cluster status with `ray status`:
 
-![Ray Status](./docs/image5.png)
+<img src="./docs/image5.png" alt="Ray Status" width="300">
