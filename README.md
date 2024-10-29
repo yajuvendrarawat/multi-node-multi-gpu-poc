@@ -79,6 +79,7 @@ kubectl exec $workerPodName -- nvidia-smi
 ```md
 oc wait --for=condition=ready pod/${podName} -n $DEMO_NAMESPACE --timeout=300s
 export isvc_url=$(oc get route |grep $MODEL_NAME-vllm-multinode| awk '{print $2}')
+```
 
 * Send a RESTful request to the LLM deployed in Multi-Node Multi-GPU:
 
