@@ -53,6 +53,18 @@ workerPodName=$(kubectl get pod -l app=isvc.$MODEL_NAME-predictor-worker --no-he
 oc wait --for=condition=ready pod/${podName} --timeout=300s
 ```
 
+* You can check the logs for both the head and worker pods:
+
+    - **Head Node**
+
+![head pod](./docs/image1.png)
+
+![head pod](./docs/image2.png)
+
+    - **Worker Node**
+
+![worker pod](./docs/image3.png)
+
 *  Check the GPU memory size for both the head and worker pods
 
 ```md
