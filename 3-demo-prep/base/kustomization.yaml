@@ -11,5 +11,3 @@ resources:
   - model-pvc.yaml # PVC for model storage
   - token.yaml # HuggingFace Token
   - download-model-to-pvc.yaml # Download model to PVC
-  - custom-crd.yaml # Update ServingRuntime and InferenceService CRD
-  - vllm-multinode-sr.yaml # VLLM Multi-Node ServingRuntime
