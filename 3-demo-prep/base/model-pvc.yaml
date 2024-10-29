@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: llama-3-8b-pvc
+  name: model-pvc
 spec:
   accessModes:
     - ReadWriteMany
   volumeMode: Filesystem
   resources:
     requests:
-      storage: 50Gi
+      storage: 100Gi
   storageClassName: nfs

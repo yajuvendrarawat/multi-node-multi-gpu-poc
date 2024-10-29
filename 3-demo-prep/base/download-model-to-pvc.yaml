@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: setup-llama3-8b-binary
+  name: download-model-to-pvc
 spec:
   volumes:
     - name: model-volume
       persistentVolumeClaim:
-        claimName: llama-3-8b-pvc
+        claimName: model-pvc
   restartPolicy: Never
   initContainers:
     - name: fix-volume-permissions

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: download-model-to-pvc
+spec:
+  containers:
+    - name: download-model
+      env:
+        - name: MODEL
+          value: ibm-granite/granite-34b-code-instruct-8k/

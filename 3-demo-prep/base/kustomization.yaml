@@ -6,7 +6,6 @@ namespace: demo-multi-node-multi-gpu
 
 resources:
   - dsp.yaml # Data Science Project / Namespace
-#  - minio.yaml
   - model-pvc.yaml # PVC for model storage
   - token.yaml # HuggingFace Token
   - download-model-to-pvc.yaml # Download model to PVC

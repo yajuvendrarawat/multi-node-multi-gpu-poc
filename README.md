@@ -20,13 +20,13 @@ bash utils/nfs-operator.sh
 * Install RHOAI and other operators
 
 ```md
-kubectl apply -k 1-rhoai-operators/overlays/
+kubectl apply -k 1-rhoai-operators/overlays/llama3
 ```
 
 * Install RHOAI, NFD, NFS and NVIDIA GPU Instances 
 
 ```md
-kubectl apply -k 2-rhoai-instances/overlays/
+kubectl apply -k 2-rhoai-instances/overlays/llama3
 ```
 
 * Deploy the prerequisites for the PoC including the Model
@@ -47,10 +47,10 @@ oc process vllm-multinode-runtime-template -n $DEMO_NAMESPACE | kubectl apply -n
 * Check the GPU resource status
 
 ```md
-podName=$(oc get pod -l app=isvc.$MODEL_NAME-predictor --no-headers|cut -d' ' -f1)
-workerPodName=$(kubectl get pod -l app=isvc.$MODEL_NAME-predictor-worker --no-headers|cut -d' ' -f1)
+podName=$(oc get pod -n $DEMO_NAMESPACE -l app=isvc.$MODEL_NAME-predictor --no-headers|cut -d' ' -f1)
+workerPodName=$(kubectl get pod -n $DEMO_NAMESPACE -l app=isvc.$MODEL_NAME-predictor-worker --no-headers|cut -d' ' -f1)
 
-oc wait --for=condition=ready pod/${podName} --timeout=300s
+oc -n $DEMO_NAMESPACE wait --for=condition=ready pod/${podName} --timeout=300s
 ```
 
 * You can check the logs for both the head and worker pods:
@@ -78,18 +78,26 @@ kubectl exec $workerPodName -- nvidia-smi
 
 ```md
 oc wait --for=condition=ready pod/${podName} -n $DEMO_NAMESPACE --timeout=300s
-export isvc_url=$(oc get route |grep $MODEL_NAME-vllm-multinode| awk '{print $2}')
+export isvc_url=$(oc get route -n $DEMO_NAMESPACE |grep $MODEL_NAME| awk '{print $2}')
 ```
 
 * Send a RESTful request to the LLM deployed in Multi-Node Multi-GPU:
 
-curl http://$isvc_url/v1/completions \
-       -H "Content-Type: application/json" \
-       -d '{
-            "model": "$MODEL_NAME",
-            "prompt": "At what temperature does Nitrogen boil?",
-            "max_tokens": 100,
-            "temperature": 0
-        }'
-
+```md
+curl https://$isvc_url/v1/completions \
+   -H "Content-Type: application/json" \
+   -d "{
+        \"model\": \"$MODEL_NAME\",
+        \"prompt\": \"What is the biggest clothes retail company in the world?\",
+        \"max_tokens\": 100,
+        \"temperature\": 0
+    }"
 ```
+
+* The answer of the LLM will look like this:
+
+![LLM Answer](./docs/image4.png)
+
+* You can also check the Ray cluster status with `ray status`:
+
+![Ray Status](./docs/image5.png)
