@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Add the namespace to the resources
+namespace: demo-multi-node-multi-gpu
+
+# These are the Operators required to install the RHOAI + KServe + Authorino Stack
+resources:
+  - dsp.yaml # Data Science Project / Namespace
+#  - minio.yaml
+  - model-pvc.yaml # PVC for model storage
+  - token.yaml # HuggingFace Token
+  - download-model-to-pvc.yaml # Download model to PVC
+  - custom-crd.yaml # Update ServingRuntime and InferenceService CRD
+  - vllm-multinode-sr.yaml # VLLM Multi-Node ServingRuntime

@@ -1,0 +1,11 @@
+kind: Project
+apiVersion: project.openshift.io/v1
+metadata:
+  name: demo-multi-node-multi-gpu
+  labels:
+    kubernetes.io/metadata.name: demo-multi-node-multi-gpu
+    opendatahub.io/dashboard: 'true'
+  annotations:
+    openshift.io/description: demo-multi-node-multi-gpu
+    openshift.io/display-name: demo-multi-node-multi-gpu
+spec: {}
