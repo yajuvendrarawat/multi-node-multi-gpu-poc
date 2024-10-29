@@ -61,7 +61,7 @@ oc wait --for=condition=ready pod/${podName} --timeout=300s
 
 ![head pod](./docs/image2.png)
 
-    - **Worker Node**
+ - **Worker Node**
 
 ![worker pod](./docs/image3.png)
 
