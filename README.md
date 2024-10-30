@@ -1,6 +1,6 @@
 # Deploy Big LLMs with Multi-Worker and Multi-GPUs
 
-Deploying models with KServe simplifies model serving, but the rapid growth of Large Language Models (LLMs) makes deploying these massive models on a single GPU increasingly challenging. To address this, leveraging multiple GPUs across multiple nodes has become essential. Fortunately, vLLM supports multi-node/multi-GPU deployment using Ray, and the Out-of-the-Box (OOB) runtime, `vllm-multinode-runtime`, OpenShift AI provides a solution for multi-node/multi-GPU setups.
+Deploying models with KServe simplifies model serving, but the rapid growth of Large Language Models (LLMs) makes deploying these massive models on a single GPU increasingly challenging. To address this, leveraging multiple GPUs across multiple nodes has become essential. Fortunately, vLLM supports multi-node/multi-GPU deployment using Ray, and the serving runtime, `vllm-multinode-runtime`, OpenShift AI provides a solution for multi-node/multi-GPU setups.
 
 This guide details the steps to enable multi-node/multi-GPU deployment with OpenShift AI model serving.
 
