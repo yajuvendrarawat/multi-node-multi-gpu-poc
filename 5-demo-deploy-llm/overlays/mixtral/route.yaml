@@ -1,0 +1,23 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: vllm-mixtral-8x7b
+  namespace: demo-multi-node-multi-gpu
+  labels:
+    app: isvc.vllm-mixtral-8x7b-predictor
+    component: predictor
+    isvc.generation: "1"
+    serving.kserve.io/inferenceservice: vllm-mixtral-8x7b
+  annotations:
+    openshift.io/host.generated: "true"
+spec:
+  to:
+    kind: Service
+    name: vllm-mixtral-8x7b-predictor
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

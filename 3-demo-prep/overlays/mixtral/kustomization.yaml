@@ -5,4 +5,5 @@ resources:
   - ../../base
 
 patchesStrategicMerge:
-  - patch-granite.yaml
+  - patch-mixtral.yaml
+  - patch-pvc.yaml

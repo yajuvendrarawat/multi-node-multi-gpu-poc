@@ -9,6 +9,7 @@ Repo for PoC multi-node with multi-gpu
 ```md
 DEMO_NAMESPACE="demo-multi-node-multi-gpu"
 MODEL_NAME="vllm-llama3-8b"
+MODEL_TYPE="llama3"
 ```
 
 * Install NFS Operator
@@ -20,25 +21,25 @@ bash utils/nfs-operator.sh
 * Install RHOAI and other operators
 
 ```md
-kubectl apply -k 1-rhoai-operators/overlays/llama3
+kubectl apply -k 1-rhoai-operators/overlays/
 ```
 
 * Install RHOAI, NFD, NFS and NVIDIA GPU Instances 
 
 ```md
-kubectl apply -k 2-rhoai-instances/overlays/llama3
+kubectl apply -k 2-rhoai-instances/overlays/
 ```
 
 * Deploy the prerequisites for the PoC including the Model
 
 ```md
-kubectl apply -k 3-demo-prep/
+kubectl apply -k 3-demo-prep/overlays/$MODEL_TYPE
 ```
 
 * Deploy Custom CRD and vLLM Multi Node Serving Runtime Template
 
 ```md
-kubectl apply -k 4-demo-deploy-is-sr
+kubectl apply -k 4-demo-deploy-is-sr/overlays
 oc process vllm-multinode-runtime-template -n $DEMO_NAMESPACE | kubectl apply -n $DEMO_NAMESPACE -f -  
 ```
 
@@ -55,7 +56,7 @@ oc -n $DEMO_NAMESPACE wait --for=condition=ready pod/${podName} --timeout=300s
 
 * You can check the logs for both the head and worker pods:
 
-    - **Head Node**
+ - **Head Node**
 
 ![head pod](./docs/image1.png)
 

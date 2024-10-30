@@ -48,7 +48,7 @@ spec:
           from huggingface_hub import snapshot_download
           snapshot_download(
               repo_id='${MODEL}',
-              local_dir='/mnt/models/hf/8b_instruction_tuned',
+              local_dir='/mnt/models/hf/instruction_tuned',
               local_dir_use_symlinks=False,
               use_auth_token='${HUGGING_FACE_HUB_TOKEN}'
           )"

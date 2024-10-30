@@ -4,7 +4,8 @@ metadata:
   annotations:
     serving.kserve.io/deploymentMode: RawDeployment
     serving.kserve.io/autoscalerClass: external
-  name: vllm-llama3-8b
+  name: vllm-mixtral-8x7b
+  namespace: demo-multi-node-multi-gpu
 spec:
   predictor:
     model:
@@ -12,7 +13,7 @@ spec:
         name: vLLM
       runtime: vllm-multinode-runtime
       storageUri: pvc://model-pvc/hf/instruction_tuned
-    workerSpec: {}
     tolerations:
       - effect: NoSchedule
         key: nvidia.com/gpu
+    workerSpec: {}
