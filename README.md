@@ -1,8 +1,35 @@
 # Deploy Big LLMs with Multi-Worker and Multi-GPUs
 
-Repo for PoC multi-node with multi-gpu
+Deploying models with KServe simplifies model serving, but the rapid growth of Large Language Models (LLMs) makes deploying these massive models on a single GPU increasingly challenging. To address this, leveraging multiple GPUs across multiple nodes has become essential. Fortunately, vLLM supports multi-node/multi-GPU deployment using Ray, and the Out-of-the-Box (OOB) runtime, `vllm-multinode-runtime`, in Open Data Hub (ODH) provides a solution for multi-node/multi-GPU setups.
 
-### Guide
+This guide details the steps to enable multi-node/multi-GPU deployment with OpenShift AI model serving. Before proceeding, please ensure you meet the following prerequisites and understand the limitations of this setup.
+
+## 2. Important Disclaimer
+
+> IMPORTANT DISCLAIMER: Read before proceed!
+
+* These demos/repository are **not supported by OpenShift AI/RHOAI**; they rely on upstream projects.
+* This is prototyping/testing work intended to confirm functionality and determine the necessary requirements.
+* These features are **not available in the RHOAI dashboard**. If you want to implement them, you will need to adapt YAML files to fit your use case.
+
+## 3. Tested Scenarios
+
+* OpenShift Cluster 4.15 (AWS)
+* AWS g5.4xlarge instances (NVIDIA A10G - 24GiB vRAM)
+* RHOAI 2.14
+
+## 4. Considerations
+
+1. **Deployment Mode**: Multi-node functionality is supported only in `RawDeployment` mode.
+2. **Auto-scaling**: Not available for multi-node setups. The autoscaler will automatically be set to `external`.
+3. **Persistent Volume Claim (PVC)**: Required for multi-node configurations, and it must support the `ReadWriteMany (RWM)` access mode.
+4. **Required Operators**:
+   - **Node Feature Discovery Operator**: Required to detect node features.
+   - **NVIDIA GPU Operator**: Required to use GPUs for inference.
+
+## 5. Demo Guide 
+
+### 5.1 Deploy RHOAI and Prereqs
 
 * Export Variables
 
@@ -30,6 +57,8 @@ kubectl apply -k 1-rhoai-operators/overlays/
 kubectl apply -k 2-rhoai-instances/overlays/
 ```
 
+### 5.2 Deploy vLLM Multi-Node prerequisites
+
 * Deploy the prerequisites for the PoC including the Model
 
 ```md
@@ -43,7 +72,7 @@ kubectl apply -k 4-demo-deploy-is-sr/overlays
 oc process vllm-multinode-runtime-template -n $DEMO_NAMESPACE | kubectl apply -n $DEMO_NAMESPACE -f -  
 ```
 
-### Check and Validate the Model deployed in Multi-Node with Multi-GPUs
+### 5.2 Check and Validate the Model deployed in Multi-Node with Multi-GPUs
 
 * Check the GPU resource status
 
@@ -102,3 +131,21 @@ curl https://$isvc_url/v1/completions \
 * You can also check the Ray cluster status with `ray status`:
 
 <img src="./docs/image5.png" alt="Ray Status" width="300">
+
+## 6. Notes for Multi-Node Setup
+
+1. **Parallelism Settings**:
+   - `TENSOR_PARALLEL_SIZE` and `PIPELINE_PARALLEL_SIZE` cannot be set via environment variables. These must be configured through `workerSpec.tensorParallelSize` and `workerSpec.pipelineParallelSize`.
+   - In a multi-node ServingRuntime, both `workerSpec.tensorParallelSize` and `workerSpec.pipelineParallelSize` must be specified.
+   - The minimum values:
+     - `workerSpec.tensorParallelSize`: 1
+     - `workerSpec.pipelineParallelSize`: 2
+
+2. **Supported GPU Types**:
+   - Allowed GPU types: `nvidia.com/gpu` (default), `intel.com/gpu`, `amd.com/gpu`, and `habana.ai/gaudi`.
+   - The GPU type can be specified in `InferenceService`. However, if the GPU type differs from what is set in the `ServingRuntime`, both GPU types will be assigned, potentially causing issues.
+
+3. **Autoscaler Configuration**: The autoscaler must be configured as `external`.
+
+4. **Storage Protocol**:
+   - The only supported storage protocol for `storageUri` is `PVC`.
