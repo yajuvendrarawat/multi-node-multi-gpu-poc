@@ -90,7 +90,7 @@ kubectl apply -k 4-demo-deploy-is-sr/overlays
 oc process vllm-multinode-runtime-template -n $DEMO_NAMESPACE | kubectl apply -n $DEMO_NAMESPACE -f -  
 ```
 
-### 5.2 Check and Validate the Model deployed in Multi-Node with Multi-GPUs
+### 5.3 Check and Validate the Model deployed in Multi-Node with Multi-GPUs
 
 * Check the GPU resource status
 
