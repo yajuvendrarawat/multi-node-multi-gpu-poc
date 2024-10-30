@@ -1,8 +1,23 @@
 # Deploy Big LLMs with Multi-Worker and Multi-GPUs
 
-Deploying models with KServe simplifies model serving, but the rapid growth of Large Language Models (LLMs) makes deploying these massive models on a single GPU increasingly challenging. To address this, leveraging multiple GPUs across multiple nodes has become essential. Fortunately, vLLM supports multi-node/multi-GPU deployment using Ray, and the Out-of-the-Box (OOB) runtime, `vllm-multinode-runtime`, in Open Data Hub (ODH) provides a solution for multi-node/multi-GPU setups.
+Deploying models with KServe simplifies model serving, but the rapid growth of Large Language Models (LLMs) makes deploying these massive models on a single GPU increasingly challenging. To address this, leveraging multiple GPUs across multiple nodes has become essential. Fortunately, vLLM supports multi-node/multi-GPU deployment using Ray, and the Out-of-the-Box (OOB) runtime, `vllm-multinode-runtime`, OpenShift AI provides a solution for multi-node/multi-GPU setups.
 
-This guide details the steps to enable multi-node/multi-GPU deployment with OpenShift AI model serving. Before proceeding, please ensure you meet the following prerequisites and understand the limitations of this setup.
+This guide details the steps to enable multi-node/multi-GPU deployment with OpenShift AI model serving.
+
+## Table of Contents
+- [Deploy Big LLMs with Multi-Worker and Multi-GPUs](#deploy-big-llms-with-multi-worker-and-multi-gpus)
+- [Important Disclaimer](#2-important-disclaimer)
+- [Tested Scenarios](#3-tested-scenarios)
+- [Considerations](#4-considerations)
+- [Demo Guide](#5-demo-guide)
+  - [Deploy RHOAI and Prereqs](#51-deploy-rhoai-and-prereqs)
+  - [Deploy vLLM Multi-Node Prerequisites](#52-deploy-vllm-multi-node-prerequisites)
+  - [Check and Validate the Model Deployed in Multi-Node with Multi-GPUs](#53-check-and-validate-the-model-deployed-in-multi-node-with-multi-gpus)
+- [Notes for Multi-Node Setup](#6-notes-for-multi-node-setup)
+  - [Parallelism Settings](#61-parallelism-settings)
+  - [Supported GPU Types](#62-supported-gpu-types)
+  - [Autoscaler Configuration](#63-autoscaler-configuration)
+  - [Storage Protocol](#64-storage-protocol)
 
 ## 2. Important Disclaimer
 
@@ -17,6 +32,9 @@ This guide details the steps to enable multi-node/multi-GPU deployment with Open
 * OpenShift Cluster 4.15 (AWS)
 * AWS g5.4xlarge instances (NVIDIA A10G - 24GiB vRAM)
 * RHOAI 2.14
+
+* Llama3-8B - AWS g5.4xlarge (x2)
+* Mixtral-8x7B - AWS g5.4xlarge (x8)
 
 ## 4. Considerations
 
