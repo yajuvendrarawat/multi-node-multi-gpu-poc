@@ -4,7 +4,6 @@ kind: Kustomization
 # Add the namespace to the resources
 namespace: demo-multi-node-multi-gpu
 
-# These are the Operators required to install the RHOAI + KServe + Authorino Stack
 resources:
   - vllm-multinode-sr.yaml # VLLM Multi-Node ServingRuntime
   - custom-crd.yaml # Update ServingRuntime and InferenceService CRD
