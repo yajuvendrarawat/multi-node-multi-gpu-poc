@@ -33,8 +33,8 @@ This guide details the steps to enable multi-node/multi-GPU deployment with Open
 * AWS g5.4xlarge instances (NVIDIA A10G - 24GiB vRAM)
 * RHOAI 2.14
 
-* Llama3-8B - AWS g5.4xlarge (x2)
-* Mixtral-8x7B - AWS g5.4xlarge (x8)
+* [Llama3-8B - AWS g5.4xlarge (x2)](#53-check-and-validate-the-model-deployed-in-multi-node-with-multi-gpus)
+* [Mixtral-8x7B - AWS g5.4xlarge (x8)](./docs/mixtral.md)
 
 ## 4. Considerations
 
