@@ -6,3 +6,4 @@ resources:
 
 patchesStrategicMerge:
   - patch-granite.yaml
+  - patch-pvc.yaml

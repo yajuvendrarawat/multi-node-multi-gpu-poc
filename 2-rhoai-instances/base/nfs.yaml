@@ -12,4 +12,4 @@ metadata:
 spec:
   scForNFS: nfs
   scForNFSPvc: gp3-csi
-  storageSize: 100Gi
+  storageSize: 500Gi
