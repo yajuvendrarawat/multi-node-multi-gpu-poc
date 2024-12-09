@@ -92,7 +92,7 @@ oc process vllm-multinode-runtime-template -n $DEMO_NAMESPACE | kubectl apply -n
 
 ### 5.3 Check and Validate the Model deployed in Multi-Node with Multi-GPUs
 
-* Check the GPU resource status
+* Check the GPU resource status:
 
 ```md
 podName=$(oc get pod -n $DEMO_NAMESPACE -l app=isvc.$MODEL_NAME-predictor --no-headers|cut -d' ' -f1)
@@ -113,7 +113,7 @@ oc -n $DEMO_NAMESPACE wait --for=condition=ready pod/${podName} --timeout=300s
 
 ![worker pod](./docs/image3.png)
 
-*  Check the GPU memory size for both the head and worker pods
+*  Check the GPU memory size for both the head and worker pods:
 
 ```md
 echo "### HEAD NODE GPU Memory Size"
