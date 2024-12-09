@@ -23,7 +23,6 @@ This guide details the steps to enable multi-node/multi-GPU deployment with Open
 
 > IMPORTANT DISCLAIMER: Read before proceed!
 
-* These demos/repository are **not supported by OpenShift AI/RHOAI**; they rely on upstream projects.
 * This is prototyping/testing work intended to confirm functionality and determine the necessary requirements.
 * These features are **not available in the RHOAI dashboard**. If you want to implement them, you will need to adapt YAML files to fit your use case.
 
