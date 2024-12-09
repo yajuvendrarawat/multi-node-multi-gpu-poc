@@ -62,6 +62,12 @@ MODEL_TYPE="llama3"
 bash utils/nfs-operator.sh
 ```
 
+* If you're in AWS, use the gpu-machineset script to provision a GPU machineset:
+
+```md
+bash utils/gpu-machineset.sh
+```
+
 * Install RHOAI and other operators
 
 ```md
@@ -116,9 +122,9 @@ oc -n $DEMO_NAMESPACE wait --for=condition=ready pod/${podName} --timeout=300s
 
 ```md
 echo "### HEAD NODE GPU Memory Size"
-kubectl exec $podName -- nvidia-smi
+kubectl -n $DEMO_NAMESPACE exec $podName -- nvidia-smi
 echo "### Worker NODE GPU Memory Size"
-kubectl exec $workerPodName -- nvidia-smi
+kubectl -n $DEMO_NAMESPACE exec $workerPodName -- nvidia-smi
 ```
 
 * Verify the status of your InferenceService, run the following command:
@@ -135,7 +141,7 @@ curl https://$isvc_url/v1/completions \
    -H "Content-Type: application/json" \
    -d "{
         \"model\": \"$MODEL_NAME\",
-        \"prompt\": \"What is the biggest clothes retail company in the world?\",
+        \"prompt\": \"What is the biggest mountain in the world?\",
         \"max_tokens\": 100,
         \"temperature\": 0
     }"
@@ -161,7 +167,7 @@ curl https://$isvc_url/v1/completions \
 2. **Supported GPU Types**:
    - Allowed GPU types: `nvidia.com/gpu` (default), `intel.com/gpu`, `amd.com/gpu`, and `habana.ai/gaudi`.
    - The GPU type can be specified in `InferenceService`. However, if the GPU type differs from what is set in the `ServingRuntime`, both GPU types will be assigned, potentially causing issues.
-
+   - It's tested with different types of GPU within the **same family** like NVIDIA A10G and L40s.
 3. **Autoscaler Configuration**: The autoscaler must be configured as `external`.
 
 4. **Storage Protocol**:
