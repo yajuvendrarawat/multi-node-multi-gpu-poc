@@ -3,4 +3,4 @@ kind: Kustomization
 
 # These are the Instances required to install the RHOAI + KServe + Authorino Stack
 resources:
-  - ../../base
+  - ../base
