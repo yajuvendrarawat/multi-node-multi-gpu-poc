@@ -117,40 +117,35 @@ objects:
                     exit 1
                   fi
           readinessProbe:
-            failureThreshold: 2
-            periodSeconds: 10
+            failureThreshold: 3
+            periodSeconds: 30
             successThreshold: 1
-            timeoutSeconds: 5
+            timeoutSeconds: 8
             exec:
               command:
                 - bash
                 - -c
                 - |
-                  # Check if the registered nodes count matches PIPELINE_PARALLEL_SIZE
-                  registered_node_count=$(ray status | grep -c node_)
-                  if [[ $registered_node_count -ne "$PIPELINE_PARALLEL_SIZE" ]]; then
-                    echo "Readiness Probe: Unhealthy - Registered nodes count ($registered_node_count) does not match PIPELINE_PARALLEL_SIZE ($PIPELINE_PARALLEL_SIZE)."
-                    exit 1
-                  fi
+                  set -euo pipefail
 
-                  # Check if the registered ray nodes count is the same as PIPELINE_PARALLEL_SIZE
-                  gpu_status=$(ray status | grep GPU)
+                  # Check GPU status
+                  gpu_status=$(ray status | grep GPU || true)
                   if [[ -z $gpu_status ]]; then
-                    echo "$1: GPU does not exist"
+                    echo "Liveness Probe: GPU does not exist"
                     exit 1
                   fi
 
                   used_gpu=$(echo "$gpu_status" | awk '{print $1}' | cut -d'/' -f1)
                   reserved_gpu=$(echo "$gpu_status" | awk '{print $1}' | cut -d'/' -f2)
+                  echo "used_gpu: $used_gpu"
+                  echo "reserved_gpu: $reserved_gpu"
 
-                  # Determine health status based on GPU usage
                   if [[ "$used_gpu" != "$reserved_gpu" ]]; then
-                    echo "$1: Unhealthy - Used: $used_gpu, Reserved: $reserved_gpu"
+                    echo "Liveness Probe: Unhealthy - Used: $used_gpu, Reserved: $reserved_gpu"
                     exit 1
                   fi
-                  
-                  # Check model health
-                  curl --silent --max-time 5 --fail-with-body http://localhost:8080/health
+
+                  echo "Liveness Probe: Healthy"
           startupProbe:
             failureThreshold: 40
             periodSeconds: 30
