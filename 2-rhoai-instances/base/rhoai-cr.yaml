@@ -4,31 +4,32 @@ metadata:
   name: default-dsc
 spec:
   components:
-    dashboard:
-      managementState: Managed
-    workbenches:
-      managementState: Managed
-    datasciencepipelines:
-      managementState: Managed
-    kueue:
-      managementState: Managed
     codeflare:
       managementState: Managed
-    ray:
-      managementState: Managed
-    modelmeshserving:
-      managementState: Managed
     kserve:
-      defaultDeploymentMode: RawDeployment # Multi-Node Multi-GPU only works with RawDeployment
-      devFlags:
-        manifests:
-          - contextDir: config
-            sourcePath: overlays/odh
-            uri: 'https://github.com/jooho/kserve/tarball/vllm-multinode'
       managementState: Managed
       serving:
         ingressGateway:
           certificate:
             type: OpenshiftDefaultIngress
-        managementState: Removed # Needed for disable KServe Native Serving
+        managementState: Managed
         name: knative-serving
+    modelregistry:
+      managementState: Removed
+      registriesNamespace: rhoai-model-registries
+    trustyai:
+      managementState: Managed
+    ray:
+      managementState: Managed
+    kueue:
+      managementState: Managed
+    workbenches:
+      managementState: Managed
+    dashboard:
+      managementState: Managed
+    modelmeshserving:
+      managementState: Managed
+    datasciencepipelines:
+      managementState: Managed
+    trainingoperator:
+      managementState: Removed
