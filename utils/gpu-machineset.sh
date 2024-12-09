@@ -3,14 +3,14 @@
 ### Define Instance Types
 get_instance_type() {
   case "$1" in
-    "Tesla T4 Single GPU") echo "g4dn.2xlarge" ;;
+    "Tesla T4 Single GPU") echo "g4dn.4xlarge" ;;
     "Tesla T4 Multi GPU") echo "g4dn.12xlarge" ;;
-    "A10G Single GPU") echo "g5.2xlarge" ;;
+    "A10G Single GPU") echo "g5.4xlarge" ;;
     "A10G Large GPU") echo "g5.8xlarge" ;;
     "A100") echo "p4d.24xlarge" ;;
     "H100") echo "p5.48xlarge" ;;
     "DL1") echo "dl1.24xlarge" ;;
-    "L4 Single GPU") echo "g6.2xlarge" ;;
+    "L4 Single GPU") echo "g6.4xlarge" ;;
     "L4 Multi GPU") echo "g6.12xlarge" ;;
     *) echo "Invalid option" ;;
   esac

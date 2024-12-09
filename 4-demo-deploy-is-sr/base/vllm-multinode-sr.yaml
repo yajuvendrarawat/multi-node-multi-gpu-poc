@@ -35,7 +35,7 @@ objects:
           priority: 2
       containers:
         - name: kserve-container
-          image: quay.io/modh/vllm:rhoai-2.15-cuda
+          image: quay.io/modh/vllm@sha256:c86ff1e89c86bc9821b75d7f2bbc170b3c13e3ccf538bf543b1110f23e056316
           command: ["bash", "-c"]
           args:
             - |
@@ -176,7 +176,7 @@ objects:
         tensorParallelSize: 1
         containers:
           - name: worker-container
-            image: quay.io/modh/vllm:rhoai-2.15-cuda
+            image: quay.io/modh/vllm@sha256:c86ff1e89c86bc9821b75d7f2bbc170b3c13e3ccf538bf543b1110f23e056316
             command: ["bash", "-c"]
             args:
               - |
@@ -219,7 +219,7 @@ objects:
                 memory: 48Gi
                 nvidia.com/gpu: "1"
               requests:
-                cpu: "8"
+                cpu: "6"
                 nvidia.com/gpu: "1"
             volumeMounts:
               - name: shm
@@ -254,3 +254,6 @@ objects:
             emptyDir:
               medium: Memory
               sizeLimit: 12Gi
+        tolerations:
+          - effect: NoSchedule
+            key: nvidia.com/gpu
