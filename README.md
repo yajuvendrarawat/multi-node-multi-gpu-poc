@@ -23,8 +23,9 @@ This guide details the steps to enable multi-node/multi-GPU deployment with Open
 
 > IMPORTANT DISCLAIMER: Read before proceed!
 
-* This is prototyping/testing work intended to confirm functionality and determine the necessary requirements.
+* This is **prototyping/testing work** intended to confirm functionality and determine the necessary requirements.
 * These features are **not available in the RHOAI dashboard**. If you want to implement them, you will need to adapt YAML files to fit your use case.
+* This content is authored by Red Hat experts, but has not yet been tested on every supported configuration.
 
 ## 3. Tested Scenarios
 
