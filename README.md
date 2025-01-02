@@ -29,7 +29,7 @@ This guide details the steps to enable multi-node/multi-GPU deployment with Open
 
 ## 3. Tested Scenarios
 
-* OpenShift Cluster 4.15 (AWS)
+* OpenShift Cluster 4.16+ (AWS)
 * AWS g5.4xlarge instances (NVIDIA A10G - 24GiB vRAM)
 * RHOAI 2.14
 
