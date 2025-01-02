@@ -40,7 +40,7 @@ This guide details the steps to enable multi-node/multi-GPU deployment with Open
 
 1. **Deployment Mode**: Multi-node functionality is supported only in `RawDeployment` mode.
 2. **Auto-scaling**: Not available for multi-node setups. The autoscaler will automatically be set to `external`.
-3. **Persistent Volume Claim (PVC)**: Required for multi-node configurations, and it must support the `ReadWriteMany (RWM)` access mode.
+3. **Persistent Volume Claim (PVC)**: Required for multi-node configurations, and it must support the `ReadWriteMany (RWX)` access mode.
 4. **Required Operators**:
    - **Node Feature Discovery Operator**: Required to detect node features.
    - **NVIDIA GPU Operator**: Required to use GPUs for inference.
