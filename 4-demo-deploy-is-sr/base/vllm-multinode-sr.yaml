@@ -131,7 +131,7 @@ objects:
                   # Check GPU status
                   gpu_status=$(ray status | grep GPU || true)
                   if [[ -z $gpu_status ]]; then
-                    echo "Liveness Probe: GPU does not exist"
+                    echo "Readiness Probe: GPU does not exist"
                     exit 1
                   fi
 
@@ -141,11 +141,11 @@ objects:
                   echo "reserved_gpu: $reserved_gpu"
 
                   if [[ "$used_gpu" != "$reserved_gpu" ]]; then
-                    echo "Liveness Probe: Unhealthy - Used: $used_gpu, Reserved: $reserved_gpu"
+                    echo "Readiness Probe: Unhealthy - Used: $used_gpu, Reserved: $reserved_gpu"
                     exit 1
                   fi
 
-                  echo "Liveness Probe: Healthy"
+                  echo "Readiness Probe: Healthy"
           startupProbe:
             failureThreshold: 40
             periodSeconds: 30
