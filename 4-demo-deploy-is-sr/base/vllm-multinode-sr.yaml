@@ -82,11 +82,11 @@ objects:
               value: /tmp
           resources:
             limits:
-              cpu: "16"
-              memory: 48Gi
+              cpu: "8"
+              memory: 28Gi
               nvidia.com/gpu: "1"
             requests:
-              cpu: "8"
+              cpu: "4"
               nvidia.com/gpu: "1"
           volumeMounts:
             - name: shm
@@ -210,11 +210,11 @@ objects:
                     fieldPath: metadata.namespace
             resources:
               limits:
-                cpu: "16"
-                memory: 48Gi
+                cpu: "8"
+                memory: 28Gi
                 nvidia.com/gpu: "1"
               requests:
-                cpu: "6"
+                cpu: "4"
                 nvidia.com/gpu: "1"
             volumeMounts:
               - name: shm
