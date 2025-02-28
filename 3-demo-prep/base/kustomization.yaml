@@ -6,7 +6,7 @@ namespace: demo-multi-node-multi-gpu
 
 resources:
 #sync wave 0
-  - namespace.yaml # Namespace
+#  - namespace.yaml # Namespace
   - dsp.yaml # Data Science Project / Namespace
   - token.yaml # HuggingFace Token
 #sync wave 1
