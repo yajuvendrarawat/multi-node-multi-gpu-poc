@@ -3,5 +3,7 @@ kind: Namespace
 metadata:
   creationTimestamp: null
   name: demo-multi-node-multi-gpu
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec: {}
 status: {}
