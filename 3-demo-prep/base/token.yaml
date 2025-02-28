@@ -2,6 +2,7 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: hftoken
+  namespace: demo-multi-node-multi-gpu
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 data:
