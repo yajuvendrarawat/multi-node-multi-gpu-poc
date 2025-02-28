@@ -1,0 +1,7 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: hftoken
+data:
+  token: REPLACE_ME
+type: Opaque
