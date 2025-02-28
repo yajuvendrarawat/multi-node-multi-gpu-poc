@@ -2,6 +2,8 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: hftoken
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 data:
   token: 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
 type: Opaque
