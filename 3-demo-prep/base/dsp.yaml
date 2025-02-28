@@ -8,4 +8,5 @@ metadata:
   annotations:
     openshift.io/description: demo-multi-node-multi-gpu
     openshift.io/display-name: demo-multi-node-multi-gpu
+    argocd.argoproj.io/sync-wave: "0"
 spec: {}
