@@ -5,5 +5,11 @@ metadata:
   name: demo-multi-node-multi-gpu
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-spec: {}
+spec:
+  ignoreDifferences:
+    - group: project.openshift.io
+      kind: Project
+      jsonPointers:
+        - /metadata/annotations
+        - /metadata/labels
 status: {}
