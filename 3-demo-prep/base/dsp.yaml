@@ -9,10 +9,4 @@ metadata:
     openshift.io/description: demo-multi-node-multi-gpu
     openshift.io/display-name: demo-multi-node-multi-gpu
     argocd.argoproj.io/sync-wave: "0"
-spec:
-  ignoreDifferences:
-    - group: project.openshift.io
-      kind: Project
-      jsonPointers:
-        - /metadata/annotations
-        - /metadata/labels
+spec: {}
