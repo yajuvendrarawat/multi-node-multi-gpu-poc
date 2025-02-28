@@ -5,8 +5,11 @@ kind: Kustomization
 namespace: demo-multi-node-multi-gpu
 
 resources:
+#sync wave 0
   - namespace.yaml # Namespace
   - dsp.yaml # Data Science Project / Namespace
-  - model-pvc.yaml # PVC for model storage
   - token.yaml # HuggingFace Token
+#sync wave 1
+  - model-pvc.yaml # PVC for model storage
+#sync wave 2
   - download-model-to-pvc.yaml # Download model to PVC
