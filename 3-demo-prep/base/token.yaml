@@ -6,5 +6,5 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 stringData:
-  token: REPLACE_ME
+  token: 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
 type: Opaque
